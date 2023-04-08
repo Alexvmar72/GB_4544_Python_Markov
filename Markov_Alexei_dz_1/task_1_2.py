@@ -17,8 +17,3 @@ else:
     s = p = int(sum / 6)
     k = int(2 * (s + p))
     print(p, k, s)
-
-
-7
-
-
