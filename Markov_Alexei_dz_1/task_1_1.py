@@ -5,10 +5,12 @@
 # 123 -> 6 (1 + 2 + 3)
 # 100 -> 1 (1 + 0 + 0) |
 
-def SunNum (args):
+num = input("Введите трёхзначное число: ")
+if len(num) != 3:
+    sum = "Необходимо в условии ввести трехзначное число"
+else:
+    sum = int(num[0])+int(num[1])+int(num[2])
+print(sum)
 
 
-
-
-print(SumNum)
 
