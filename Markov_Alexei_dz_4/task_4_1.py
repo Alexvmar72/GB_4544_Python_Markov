@@ -7,8 +7,8 @@
 first_array_count = int(input("Введите количество элементов первого множества: "))
 second_array_count = int(input("Введите количество элементов второго множества: "))
 
-set_first_array = set(int(input(f"Введите {first_array_count} элементов первого множества")) for _ in range(first_array_count))
-set_second_array = set(int(input(f"Введите {second_array_count} элементов второго множества")) for _ in range(second_array_count))
+set_first_array = set(int(input(f"Введите {i+1} элемент первого множества: ")) for i in range(first_array_count))
+set_second_array = set(int(input(f"Введите {j+1} элемент второго множества: ")) for j in range(second_array_count))
 result = sorted(set_first_array.intersection(set_second_array))
 print(set_first_array)
 print(set_second_array)
