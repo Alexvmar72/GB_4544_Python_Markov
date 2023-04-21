@@ -8,3 +8,10 @@
 #     1 2 3 4 5
 #     3
 #     -> 1
+
+size_array_n = int(input("Введите размер массива: "))
+search_number_x = int(input("Введите число которое надо найти: "))
+array_lst = list(range(1, size_array_n+1))
+print(array_lst)
+print(search_number_x)
+print(f"Введённое число встречается в искомом массиве {array_lst.count(search_number_x)} раз")
