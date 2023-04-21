@@ -12,3 +12,15 @@
 #
 # ноутбук
 #     12
+
+dict_specified = {1: "AEIOULNSTRАВЕИНОРСТ", 2: "DGДКЛМПУ",
+                3: "BCMPБГЁЬЯ", 4: "FHVWYЙЫ", 5: "KЖЗХЦЧ",
+                8: "JXШЭЮ", 10: "QZФЩЪ"}
+
+enter_message = input("Введите слово: ").upper()
+count = 0
+for i in enter_message:
+    for key, value in dict_specified.items():
+        if i in value:
+            count += key
+print(f"Стоимость введённого слова: {count}")
