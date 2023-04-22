@@ -4,3 +4,12 @@
 # *Пример:*
 # 2 2
 #   4
+
+def Sum_num(a, b):
+    if b == 0:
+        return a
+    return Sum_num(a, b-1) + 1
+
+num_a = int(input("Введите первое число: "))
+num_b = int(input("Введите второе число: "))
+print(f"a = {num_a}; b = {num_b} -> {Sum_num(num_a, num_b)}")
