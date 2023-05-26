@@ -11,3 +11,21 @@
 # **Ввод:** пара-ра-рам рам-пам-папам па-ра-па-да
 #     **Вывод:** Парам пам-пам
 
+def beer_puh(str_temp):
+    str_temp = str_temp.split()
+    list_temp = []
+    for el in str_temp:
+        sum_word = 0
+        for i in el:
+            if i in 'аеёиоуыэюя':
+                sum_word += 1
+        list_temp.append(sum_word)
+    return len(list_temp) == list_temp.count(list_temp[0])
+
+
+str_message = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+
+if beer_puh(str_message):
+    print('Парам пам-пам')
+else:
+    print('Пам парам')
