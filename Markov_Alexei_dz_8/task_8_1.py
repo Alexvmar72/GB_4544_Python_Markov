@@ -37,14 +37,16 @@ def search_in_file(str_finding): # Здесь ищем нужное
         for row in data:
             if str_finding in row:
                 print(row)
-            else:
-                print("Нет такого контакта")
+        else:
+            print("Нет такого контакта")
 
 def replace_in_file(str_finding): # Здесь ищем нужное и меняем
     with open(PATH, 'r+', encoding='UTF-8') as data:
         for row in data:
             if str_finding in row:
                 data.write(input("Введите новые Фамилию, Имя, Отчество, Номер телефона через пробел: "))
+            # Тут что-то пока не получается. Дописывает, но не меняет.
+
 
 def read_file(): # Вывод всех данных из файла построчно
     with open(PATH, 'r', encoding='UTF-8') as data:
