@@ -24,44 +24,56 @@
 # для изменения и удаления данных
 
 PATH = 'phonebook.txt'
-def entered_new_abonent(): #ввод данных нового абонента
-    abonent = input("Введите Фамилию, Имя, Отчество, Номер телефона через пробел: ")
-    return abonent
+def entered_new_user(): #ввод данных нового абонента
+    user = input("Введите Фамилию, Имя, Отчество, Номер телефона через пробел: ")
+    return user
 
-def new_abonent(message): # Запись нового абонента в файл
+def create_new_user(message): # Запись нового абонента в файл
     with open(PATH, 'a+', encoding='UTF-8') as data:
         data.write(f'{message}\n')
 
-def search_in_file(str_zapros): # Здесь ищем нужное
+def search_in_file(str_finding): # Здесь ищем нужное
     with open(PATH, 'r', encoding='UTF-8') as data:
-        for i in data:
-            if str_zapros in i:
-                print(i)
+        for row in data:
+            if str_finding in row:
+                print(row)
+            else:
+                print("Нет такого контакта")
+
+def replace_in_file(str_finding): # Здесь ищем нужное и меняем
+    with open(PATH, 'r+', encoding='UTF-8') as data:
+        for row in data:
+            if str_finding in row:
+                data.write(input("Введите новые Фамилию, Имя, Отчество, Номер телефона через пробел: "))
 
 def read_file(): # Вывод всех данных из файла построчно
     with open(PATH, 'r', encoding='UTF-8') as data:
-        for i in data:
-            print(i.strip())
+        print()
+        print(data.read())
+        print()
 
 print("*** Программа телефонный справочник ***")
 print("Ввести в справочник нового абонента - 1")
 print("Найти в справочнике абонента по одному из элементов - 2")
 print("Ввывести справочник в консоль построчно - 3")
+print("Внести изменения в записи в справочнике - 4")
 
 with open(PATH, 'a', encoding='UTF-8') as data:
     pass
 run = True
 while run:
-    programm_code = int(input("Введите номер необходимой операции со справочником: "))
+    command = int(input("Введите номер необходимой операции со справочником: "))
     corrected_code = [0, 1, 2, 3, 4, 5]
-    if programm_code in corrected_code:
-        if programm_code == 1:
-            new_abonent(entered_new_abonent())
-        elif programm_code == 2:
+    if command in corrected_code:
+        if command == 1:
+            create_new_user(entered_new_user())
+        elif command == 2:
             search_in_file(input('Введите искомое: '))
-        elif programm_code == 3:
+        elif command == 3:
             read_file()
-        elif programm_code == 0:
+        elif command == 4:
+            replace_in_file(input('Введите искомое: '))
+        elif command == 0:
             run = False
     else:
         print("Введите корректный код!")
