@@ -1,5 +1,3 @@
-
-
 # Создать телефонный справочник с
 # возможностью импорта и экспорта данных в
 # формате .txt. Фамилия, имя, отчество, номер
@@ -18,7 +16,6 @@
 # . Добавить контакт
 # . Найти контакт
 # . Выход
-
 # Задача 38: Дополнить телефонный справочник возможностью изменения и удаления данных.
 # Пользователь также может ввести имя или фамилию, и Вы должны реализовать функционал
 # для изменения и удаления данных
@@ -26,6 +23,7 @@
 PATH = 'phonebook.txt'
 def entered_new_user(): #ввод данных нового абонента
     user = input("Введите Фамилию, Имя, Отчество, Номер телефона через пробел: ")
+    print(f'Введён новый абонент: {user}')
     return user
 
 def create_new_user(message): # Запись нового абонента в файл
@@ -41,12 +39,15 @@ def search_in_file(str_finding): # Здесь ищем нужное
             print("Нет такого контакта")
 
 def replace_in_file(str_finding): # Здесь ищем нужное и меняем
-    with open(PATH, 'r+', encoding='UTF-8') as data:
-        for row in data:
-            if str_finding in row:
-                data.write(input("Введите новые Фамилию, Имя, Отчество, Номер телефона через пробел: "))
-            # Тут что-то пока не получается. Дописывает, но не меняет.
+    with open(PATH, "r", encoding='UTF-8') as file:
+        lines = file.readlines()
+        count = 0
+        for i in range(len(lines)):
+            if str_finding in lines[i]:
+                lines[i] = input("Введите новые Фамилию, Имя, Отчество, Номер телефона через пробел: ")
 
+    with open(PATH, "w", encoding='UTF-8') as file:
+        file.writelines(lines)
 
 def read_file(): # Вывод всех данных из файла построчно
     with open(PATH, 'r', encoding='UTF-8') as data:
@@ -54,19 +55,40 @@ def read_file(): # Вывод всех данных из файла постро
         print(data.read())
         print()
 
-print("*** Программа телефонный справочник ***")
-print("Ввести в справочник нового абонента - 1")
-print("Найти в справочнике абонента по одному из элементов - 2")
-print("Ввывести справочник в консоль построчно - 3")
-print("Внести изменения в записи в справочнике - 4")
+def del_in_file(str_finding): # Удаление данных из файла
+    with open(PATH, "r", encoding='UTF-8') as file:
+        lines = file.readlines()
+        count = len(lines)
+        for i in range(count):
+            if i < count and str_finding in lines[i]:
+                print(f'Найденная строка: {lines[i]}')
+                switch_choice = input('Удаляем? Если "да" нажмите "д", если нет, любую другую клавишу: ')
+                if switch_choice == 'д':
+                    print(f'Строка: {lines[i]} удалена')
+                    del lines[i]
+                    count = count - 1
+        else:
+            print('Такого значения для удаления нет')
 
-with open(PATH, 'a', encoding='UTF-8') as data:
-    pass
+    with open(PATH, "w", encoding='UTF-8') as file:
+        file.writelines(lines)
+
+main_menu = """*** Программа телефонный справочник ***
+1 - Ввести в справочник нового абонента
+2 - Найти в справочнике абонента по одному из элементов
+3 - Вывод справочника в консоль построчно
+4 - Внести изменения в записи в справочнике
+5 - Удалить запись в справочнике
+0 - Выйти из программы
+"""
+
+print(main_menu)
 run = True
+
 while run:
-    command = int(input("Введите номер необходимой операции со справочником: "))
-    corrected_code = [0, 1, 2, 3, 4, 5]
-    if command in corrected_code:
+    command = input("Введите номер необходимой операции со справочником: ")
+    if command.isdigit() and 0 <= int(command) <= 5:
+        command = int(command)
         if command == 1:
             create_new_user(entered_new_user())
         elif command == 2:
@@ -75,8 +97,11 @@ while run:
             read_file()
         elif command == 4:
             replace_in_file(input('Введите искомое: '))
+        elif command == 5:
+            del_in_file(input('Введите искомое: '))
         elif command == 0:
             run = False
     else:
         print("Введите корректный код!")
+
 print("До свидания!")
