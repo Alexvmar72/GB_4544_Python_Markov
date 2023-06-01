@@ -13,8 +13,9 @@ def search_in_file(str_finding): # Здесь ищем нужное
         for row in data:
             if str_finding in row:
                 print(row)
-        else:
-            print("Нет такого контакта")
+            else:
+                print("Нет такого контакта")
+
 
 def replace_in_file(str_finding): # Здесь ищем нужное и меняем
     with open(PATH, "r", encoding='UTF-8') as file:
