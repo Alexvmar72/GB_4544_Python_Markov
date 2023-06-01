@@ -1,8 +1,6 @@
+import text
+
 PATH = 'phonebook.txt'
-def entered_new_user(): #ввод данных нового абонента
-    user = input("Введите Фамилию, Имя, Отчество, Номер телефона через пробел: ")
-    print(f'Введён новый абонент: {user}')
-    return user
 
 def create_new_user(message): # Запись нового абонента в файл
     with open(PATH, 'a+', encoding='UTF-8') as data:
@@ -13,8 +11,8 @@ def search_in_file(str_finding): # Здесь ищем нужное
         for row in data:
             if str_finding in row:
                 print(row)
-            else:
-                print("Нет такого контакта")
+        else:
+            print(text.out_contact)
 
 
 def replace_in_file(str_finding): # Здесь ищем нужное и меняем
@@ -23,7 +21,7 @@ def replace_in_file(str_finding): # Здесь ищем нужное и меня
         count = 0
         for i in range(len(lines)):
             if str_finding in lines[i]:
-                lines[i] = input("Введите новые Фамилию, Имя, Отчество, Номер телефона через пробел: ")
+                lines[i] = input(text.replace_contact)
 
     with open(PATH, "w", encoding='UTF-8') as file:
         file.writelines(lines)
@@ -47,8 +45,7 @@ def del_in_file(str_finding): # Удаление данных из файла
                     del lines[i]
                     count = count - 1
         else:
-            print('Такого значения для удаления нет')
+            print(text.out_contact)
 
     with open(PATH, "w", encoding='UTF-8') as file:
         file.writelines(lines)
-
